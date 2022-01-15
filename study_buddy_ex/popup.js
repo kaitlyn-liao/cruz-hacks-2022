@@ -1,10 +1,11 @@
 is_working = false;
-work_min = 60;
+work_tim = 30;
 break_min = 10;
 vibe = null;
 
 // document.getElementById("bad").addEventListener("click", vibe_check);
 window.onload = function () {
+  tick();
 
   // vibe check buttons
   document.getElementById("bad").onclick    = function(){vibe_check(1)};
@@ -24,9 +25,35 @@ function vibe_check(v){
   console.log(vibe)
 }
 
+function tick(){
+  var timeDisplay = document.getElementById("time");
+  var min=Math.floor(work_tim/60);
+  var sec=work_tim-(min*60);
+  if (sec < 10) {
+    sec="0"+sec;
+  }
+  var message=min.toString()+":"+sec;
+  timeDisplay.innerHTML=message;
+  setTimeout(function() {
+    if(work_tim != 0){
+        work_tim--;
+        tick();
+    }
+    else{
+      alert("Done");
+      // clearInterval(intervalHandle);
+      resetPage();
+    }
+  }, 1000);
+
+}
+
+
+
 function timer_handler(){
+  // var timerInstance = new easytimer.Timer();
   // take form inputs and store them into cache varibles
-  // work_min = form.work
+  // work_tim = form.work
   // break_min = form.break 
 }
 
