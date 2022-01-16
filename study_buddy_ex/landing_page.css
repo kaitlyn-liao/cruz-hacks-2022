@@ -1,0 +1,19 @@
+#content-wrap-landing {
+    padding-bottom: 2.5rem;    /* Footer height */
+    padding-top: 2%;
+    max-height: 430px;
+    overflow-y: hidden;
+}
+
+#chick-start {
+    width: 75%;
+    height: 75%;
+}
+
+#welcome-text {
+    background-color: #fcc863;
+    border-radius: 10px;
+    padding: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}

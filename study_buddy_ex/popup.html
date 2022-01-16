@@ -1,35 +1,44 @@
 <!doctype html>
 <html>
 
-  <head>
-    <title>Study Buddy</title>
-    <script src="popup.js"></script>
-    <link rel="stylesheet" href="popup.css">
-  </head>
+<head>
+  <title>checkin chicken</title>
+  <script src="popup.js"></script>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="landing_page.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.10.0/css/uikit-core.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.10.0/js/uikit.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.10.0/js/uikit-icons.min.js" defer></script>
+</head>
 
-  <body>
-    <h1>Study Buddy</h1>
-
-    <div>
-      <img src="agap.png"></img>
+<body>
+  <!-- Landing Page -->
+  <div>
+    <!-- Header -->
+    <div class="uk-container">
+      <h2 class="uk-text-center">Check In Chicken</h2>
     </div>
 
-    <div class="row">
-      <!-- Happy face -->
-      <div class = "column">
-        <img src="happy.png"></img>
-      </div>
-      <!-- Meh face -->
-      <div class = "column">
-        <img src="happy.png"></img>
-      </div>
-      <!-- Sad face -->
-      <div class = "column">
-        <img src="happy.png"></img>
-      </div>
+    <!-- all other page content -->
+    <div id="content-wrap-landing" class="uk-container">
+        <br><br>
+        <div id="welcome-text" class="uk-text-center uk-text-default uk-text-secondary">
+          Hello my frand! I'm Gappy. I'm here to make sure your
+          studying is healthy and productive. Let's get started!
+        </div>
+        <div class="uk-margin">
+          <img class="uk-align-center" id="chick-start" src="chicken-logo.png"></img>
+        </div>
+        <button id="checkPage" class="uk-button uk-align-center uk-margin-none">start</button>
     </div>
-    
-    <button id="checkPage">Check this page now!</button>
-  </body>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="uk-container">
+        <!-- <button id="checkPage" class="uk-button uk-button-default uk-align-center">Button</button> -->
+      </div>
+    </footer>
+  </div>
+</body>
 
 </html>
