@@ -1,57 +1,67 @@
 var bgpage = chrome.extension.getBackgroundPage();
 
-var started = false;
-is_working = true;
-work_tim = 5;
-break_min = 10;
+// ====================================================================== EVENTS 
 
-vibe = null;
-
-
-// document.getElementById("bad").addEventListener("click", vibe_check);
 document.addEventListener("DOMContentLoaded", function() {
-  // var port = chrome.runtime.connect();
-
-  // document.getElementById("bad").onclick    = function(){vibe_check(1)};
-  // document.getElementById("poor").onclick   = function(){vibe_check(2)};
-  // document.getElementById("decent").onclick = function(){vibe_check(3)};
-  // document.getElementById("okay").onclick   = function(){vibe_check(4)};
-  // document.getElementById("great").onclick  = function(){vibe_check(5)};
-
-  const ev = document.getElementById("time_start");
-  ev.addEventListener("click", init_timers, false);
+  ev = document.getElementById("time_start");  ev.addEventListener("click", initTimer, false);
+  ev = document.getElementById("time_end");    ev.addEventListener("click", killTimer, false);
+  ev = document.getElementById("time_resume"); ev.addEventListener("click", resumeTimer, false);
+  ev = document.getElementById("time_pause");  ev.addEventListener("click", pauseTimer, false);
 
   refreshDisplay();
 });
 
-function vibe_check(v){
-  // get form from html
-  // pass into function
-  // if statements
-  // 1 -- bad
-  // 5 -- great
-  vibe = v;
-  console.log(vibe)
+// ====================================================================== DISPLAY 
+
+function refreshDisplay(){
+  refreshTimer();
+  // any other common displays we need to update
 }
 
-function init_timers(){
-  bgpage.set_work_duration(20)
-  bgpage.set_break_duration(10)
-  start_timer();
+function hide(id){
+    document.getElementById(id).style.display = "none";
 }
 
-function start_timer(){
+function show(id){
+  document.getElementById(id).style.display = "inline";
+}
+
+// ====================================================================== TIMERS
+is_working = true;
+work_sec = 20;
+break_sec = 10;
+
+function initTimer(){
+  bgpage.set_work_duration(work_sec)
+  bgpage.set_break_duration(break_sec)
+  startTimer();
+}
+
+function startTimer(){
   bgpage.set_alarm(is_working);
-  // if(is_working){ bgpage.set_alarm(bgpage.work_duration  * 1000);}
-  // else          { bgpage.set_alarm(bgpage.break_duration * 1000);}
   refreshDisplay();
 }
 
-// function hide(section){
-//     document.getElementById(section).style.display = "none";
-// }
+function killTimer(){
+  bgpage.kill_alarm();
+  refreshDisplay();
+}
 
-function refresh_timer(){
+function pauseTimer(){
+    clearTimeout(refreshDisplayTimeout);
+    // hide("time_pause");
+    // show("time_resume");
+    bgpage.pause();
+}
+
+function resumeTimer(){
+    // hide("time_resume");
+    // show("time_pause");
+    bgpage.resume();
+    refreshDisplay();
+}
+
+function refreshTimer(){
   seconds_left = bgpage.user_timer_seconds
 
   var min = Math.floor(seconds_left/60);
@@ -63,18 +73,22 @@ function refresh_timer(){
   timeDisplay.innerHTML = msg;
 
   refreshDisplayTimeout = setTimeout(refreshDisplay, 1000);
-}
 
-function refreshDisplay(){
-  refresh_timer();
-
-  // if(started){
-    // if(bgpage.user_timer_seconds >= 0){ refresh_timer(); }
-    // else{ refreshDisplay }
-  // }
-  // else{
-  //   started = true;
-  // }
-
+  if(bgpage.is_working == true){ document.getElementById("iswork").innerHTML = "Study Time"; }
+  else if(bgpage.is_working == false) { document.getElementById("iswork").innerHTML = "Break Time"; }
 
 }
+
+// =================================== VIBE CHECK
+vibe = null;
+
+function vibe_check(v){
+  // get form from html
+  // pass into function
+  // if statements
+  // 1 -- bad
+  // 5 -- great
+  vibe = v;
+  console.log(vibe)
+}
+
