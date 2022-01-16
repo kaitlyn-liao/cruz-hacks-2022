@@ -77,10 +77,10 @@ var break_sec;
 var curr_page;
 
 function initTimer(){
-  work_sec = 10;
-  break_sec = 5;
-  // work_sec = document.getElementById('study-intv').value * 60;
-  // break_sec = document.getElementById('break-intv').value * 60;
+  // work_sec = 10;
+  // break_sec = 5;
+  work_sec = document.getElementById('study-intv').value * 60;
+  break_sec = document.getElementById('break-intv').value * 60;
   // alert(work_sec + " " + break_sec);
   bgpage.set_work_duration(work_sec);
   bgpage.set_break_duration(break_sec);
@@ -169,6 +169,6 @@ function return_time(){
 
 // need to make buttons and listeners for this
 function return_land(){
+  bgpage.kill_alarm();
   changePage("land");
-  killTimer();
 }

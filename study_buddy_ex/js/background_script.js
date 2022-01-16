@@ -91,7 +91,7 @@ function turnOff(){
     if(is_study == true){ set_is_vibing(true); }
     else{
         set_is_study(!is_study);
-        set_alarm(is_study);
+        // set_alarm(is_study);
     }
 
 }
@@ -107,16 +107,3 @@ function set_is_vibing(v){
 function set_vibe(v){
     vibe = v;
 }
-
-// function vibe_check(){
-//     // prompt user to fill out vibe check
-//     // take in input response
-//     // based on input, give suggestions or pos reinforcement 
-//     // prompt user to start break
-//     // is_timing == true
-
-//     // if(is_timing == true){
-//     //     set_alarm(!is_study)
-//     // }
-//     set_alarm(is_study)
-// }
