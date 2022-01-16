@@ -29,9 +29,9 @@ function refreshDisplay(){
   // var timeDisplay = document.getElementById("time");
   // timeDisplay.innerHTML = msg;
 
-  if(bgpage.is_study == true)       { document.getElementById("iswork").innerHTML = "Study Time"; }
-  else if(bgpage.is_study == false) { document.getElementById("iswork").innerHTML = "Break Time"; }
-  if(bgpage.is_timing == false)       { document.getElementById("iswork").innerHTML = "No Timer Set";}
+  if(bgpage.is_study == true)       { document.getElementById("is_work").innerHTML = "Study Time"; }
+  else if(bgpage.is_study == false) { document.getElementById("is_work").innerHTML = "Break Time"; }
+  if(bgpage.is_timing == false)       { document.getElementById("is_work").innerHTML = "No Timer Set";}
 
   refreshDisplayTimeout = setTimeout(refreshDisplay, 1000);
 
