@@ -1,8 +1,8 @@
 /* My new stuff */
-#vibe-buttons {
+.vibe-buttons {
     display: inline-block;
-    height: 75px;
-    width: 75px;
+    height: 50px;
+    width: 50px;
     padding: 0;
     margin: 0;
     vertical-align: top;
