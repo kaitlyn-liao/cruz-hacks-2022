@@ -63,18 +63,13 @@ function refresh_timer(){
   timeDisplay.innerHTML = msg;
 
   refreshDisplayTimeout = setTimeout(refreshDisplay, 1000);
+
+  if(bgpage.is_working == true){        document.getElementById("iswork").innerHTML = "Study Time"; }
+  else if(bgpage.is_working == false) { document.getElementById("iswork").innerHTML = "Break Time"; }
+
 }
 
 function refreshDisplay(){
   refresh_timer();
-
-  // if(started){
-    // if(bgpage.user_timer_seconds >= 0){ refresh_timer(); }
-    // else{ refreshDisplay }
-  // }
-  // else{
-  //   started = true;
-  // }
-
 
 }

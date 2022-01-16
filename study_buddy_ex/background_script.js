@@ -8,7 +8,7 @@ var lag = 0; //500
 
 var work_duration;
 var break_duration;
-var is_working;
+var is_working = null;
 
 chrome.runtime.onInstalled.addListener(function() { alert("Check-In Chicken is installed!"); });
 
