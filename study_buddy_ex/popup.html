@@ -3,20 +3,20 @@
 
 <head>
   <title>checkin chicken</title>
-  <script src="./js/popup.js"></script>
   <link rel="stylesheet" href="./css/popup.css">
   <link rel="stylesheet" href="./css/landing_page.css">
   <link rel="stylesheet" href="./css/form_page.css">
   <link rel="stylesheet" href="./css/timer_page.css">
   <link rel="stylesheet" href="./css/vibecheck.css">
   <link rel="stylesheet" href="./css/uikit-3.10.0/css/uikit.min.css" />
+  <script src="./js/popup.js"></script>
   <script src="./css/uikit-3.10.0/js/uikit.min.js"></script>
   <script src="./css/uikit-3.10.0/js/uikit-icons.min.js"></script>
 </head>
 
 <body>
   <!-- Landing Page -->
-  <div>
+  <div id="land" style="display: inline;">
     <!-- Header -->
     <div class="uk-container">
       <h2 class="uk-text-center">Check In Chicken</h2>
@@ -32,7 +32,8 @@
       <div class="uk-margin">
         <img class="uk-align-center" id="chick-start" src="./img/chicken-logo.png"></img>
       </div>
-      <button id="checkPage" class="uk-button uk-align-center uk-margin-none" style="background-color: antiquewhite;">start</button>
+      <button id="land-start" class="uk-button uk-align-center uk-margin-none"
+        style="background-color: antiquewhite;">start</button>
     </div>
 
     <!-- Footer -->
@@ -41,6 +42,138 @@
       </div>
     </footer>
   </div>
+
+  <!-- Form Page -->
+  <div id="form" style="display: none;">
+    <!-- Header -->
+    <div class="uk-container">
+    </div>
+
+    <!-- all other page content -->
+    <form>
+      <div class="uk-container">
+        <div class="uk-align-right uk-margin-remove">
+          <div id="form-box">
+            <h3 class="uk-text-center">Set Your Study Timer </h3>
+            <br>
+            <p class="uk-text-center uk-text-large uk-text-secondary">study for...</p>
+            <center>
+              <div class="uk-margin">
+                <select id="study-intv" name="study-intv" class="uk-select uk-form-width-small">
+                  <option value="15">15 min</option>
+                  <option value="30">30 min</option>
+                  <option value="45">45 min</option>
+                  <option value="60">60 min</option>
+                </select>
+              </div>
+            </center>
+
+            <p class="uk-text-center uk-text-large uk-text-secondary">break for...</p>
+            <center>
+              <div class="uk-margin">
+                <select id="break-intv" name="break-intv" class="uk-select uk-form-width-small">
+                  <option value="2">2 min</option>
+                  <option value="5">5 min</option>
+                  <option value="10">10 min</option>
+                  <option value="15">15 min</option>
+                </select>
+              </div>
+            </center>
+
+          </div>
+        </div>
+        <img id="chick-form" src="./img/chicken-logo.png"></img>
+      </div>
+      <!-- Footer -->
+      <footer id="footer">
+        <div class="uk-container">
+          <input id="time_start" class="uk-button uk-button-small uk-button-default uk-align-right"
+            style="background-color: antiquewhite;" type="submit" value="submit"/>
+        </div>
+      </footer>
+    </form>
+  </div>
+
+  <!-- Timer Page -->
+  <div id="time_page" style="display: none;">
+    <!-- Header -->
+    <div class="uk-container">
+      <h2 class="uk-text-center" id="is_work">No Timer Set</h2>
+      <h2 class="uk-text-center">Check In Chicken</h2>
+    </div>
+
+    <!-- all other page content -->
+    <div id="content-wrap-landing" class="uk-container">
+      <br>
+      <div id="timer-circle" class="uk-align-center">
+        <br>
+        <p id="time" class="uk-text-center" style="font-size: 50px; margin-bottom: 0px;">00:00</p>
+        <a id="time_resume" href="" uk-icon="ratio:2; icon: play;"></a>
+        &nbsp;&nbsp;
+        <a id="time_pause" href="" uk-icon="" style="font-size: 22px; margin-right: 10px;">|&nbsp;|</a>
+      </div>
+
+
+      <div class="uk-margin">
+        <div style="margin-right: 30px;">
+          <div id="timer-text" class="uk-align-right uk-margin-remove">
+            hi there hi there hi there hi there hi there hi there hi there hi there hi there
+          </div>
+        </div>
+        <br>
+        <div style="margin-left: 30px;">
+          <img class="uk-align-left uk-margin-remove" id="chick-timer" src="./img/chicken-logo.png"></img>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="uk-container">
+        <button id="time_end" class="uk-button uk-button-small uk-button-default uk-align-right"
+          style="background-color: antiquewhite;" type="button">END</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Vibe Check Page -->
+  <div id="vibe" style="display: none;">
+    <!-- Header -->
+    <div class="uk-container">
+      <h2 class="uk-text-center">Check In Chicken</h2>
+    </div>
+
+    <!-- all other page content -->
+    <div id="content-wrap-landing" class="uk-container">
+      <br><br>
+      <div id="welcome-text" class="uk-text-center uk-text-default uk-text-secondary">
+        Vibe check! How are you feeling?
+      </div>
+      <div class="uk-margin">
+        <img class="uk-align-center" id="chick-start" src="./img/chicken-logo.png"></img>
+      </div>
+      <!-- Place three buttons (that are actually images) here -->
+      <div id="vibe-buttons-div">
+        <!-- Sad -->
+        <button id="vibe-buttons" onclick="myFunction()"><img src="./img/chicken-logo.png"></button>
+        <!-- Meh -->
+        <button id="vibe-buttons" onclick="myFunction()"><img src="./img/chicken-logo.png"></button>
+        <!-- Happy -->
+        <button id="vibe-buttons" onclick="myFunction()"><img src="./img/chicken-logo.png"></button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="uk-container">
+        <!-- <div class="uk-align-right">
+          <button id="checkPage" class="uk-button uk-button-default">End</button>
+        </div> -->
+
+      </div>
+    </footer>
+  </div>
+
 </body>
 
 </html>
