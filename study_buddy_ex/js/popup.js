@@ -38,7 +38,7 @@ function refreshDisplay(){
 
     if(bgpage.is_study == true)       { document.getElementById("is_work").innerHTML = "Study Time"; }
     else if(bgpage.is_study == false) { document.getElementById("is_work").innerHTML = "Break Time"; }
-    if(bgpage.is_timing == false)       { document.getElementById("is_work").innerHTML = "No Timer Set";}
+    if(bgpage.is_timing == false)     { document.getElementById("is_work").innerHTML = "No Timer Set";}
 
     refreshDisplayTimeout = setTimeout(refreshDisplay, 1000);
   }
@@ -81,7 +81,7 @@ function initTimer(){
   // break_sec = 5;
   work_sec = document.getElementById('study-intv').value * 60;
   break_sec = document.getElementById('break-intv').value * 60;
-  // alert(work_sec + " " + break_sec);
+
   bgpage.set_work_duration(work_sec);
   bgpage.set_break_duration(break_sec);
 
@@ -163,12 +163,13 @@ function vibe_answer(v){
 function return_time(){
   changePage("time_page");
   bgpage.set_is_vibing(false);
-  bgpage.set_is_study(!bgpage.is_study);
+  bgpage.set_is_study(false);
   bgpage.set_alarm(bgpage.is_study);
 }
 
 // need to make buttons and listeners for this
 function return_land(){
+  bgpage.set_is_vibing(false);
   bgpage.kill_alarm();
   changePage("land");
 }

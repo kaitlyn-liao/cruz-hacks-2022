@@ -36,6 +36,7 @@ function set_break_duration(time){
 }
 
 function set_alarm(w){
+    clearInterval(alarmRingTimeout);
     set_is_study(w);
     set_is_timing(true);
     var tMillis;
@@ -79,8 +80,10 @@ function ringIn(tMillis){
 }
 
 function ring(){
-    alert("Study time is over! Good Work!")
-    turnOff();
+    if(showpageID == "time_page"){
+        alert("Study time is over! Good Work!");
+        turnOff();
+    }
 }
 
 function turnOff(){
@@ -90,8 +93,9 @@ function turnOff(){
     set_is_timing(false)
     if(is_study == true){ set_is_vibing(true); }
     else{
+        set_is_vibing(false);
         set_is_study(!is_study);
-        // set_alarm(is_study);
+        set_alarm(is_study);
     }
 
 }
