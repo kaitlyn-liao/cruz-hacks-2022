@@ -152,11 +152,32 @@ function vibe_answer(v){
   changePage("help");
 
   if(v == "sad"){ alert("sad"); }
-  if(v == "meh"){ alert("meh"); }
+  if(v == "meh"){ alert("meh for meditation"); meh_help(); }
   if(v == "hap"){ alert("hap"); }
   
   
   // display next page and associated buttons to move on
+}
+
+function meh_help() {
+  var mehHTML = '';
+
+  mehText = "Sorry things aren't going as good as they could be. " +  
+            "Hopefully this break gives you a chance to reset. " + 
+            "In fact, a great way to reset is by doing some meditation. " +
+            "<br><br>Let your mind clear and body relax. Focus on your breathing. " + 
+            "In through your nose. Out through your mouth. " + 
+            "Do that a couple times and you will feel refreshed and ready to take on whatever's next." + 
+            "<br><br>Try listening to this Spotify playlist while on your break! <br><br>";
+
+  mehTextStyle = "<div class='uk-text-center uk-text-default uk-text-secondary'>" + mehText + "</div>";
+  iframeHTML = "<iframe src='https://open.spotify.com/embed/playlist/37i9dQZF1DWZqd5JICZI0u?utm_source=generator' width='100%' height='250' frameBorder='0' allowfullscreen='' allow= 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' style='border-radius: 10px;'></iframe>";
+  
+  mehHTML += mehTextStyle; 
+  mehHTML += iframeHTML;
+
+  help_div_id = document.getElementById('help-meh-content');
+  help_div_id.innerHTML = mehHTML;
 }
 
 // need to make buttons and listeners for this
