@@ -11,17 +11,35 @@
 </head>
 
 <body>
-  <img src="agap.png"/>
-    <h1>Vibe Check-In!</h1>
-    <div id="checkin_buttons">
-      <h2>How are you feeling?</h2>
-      <button id="bad"    >1</button>
-      <button id="poor"   >2</button>
-      <button id="decent" >3</button>
-      <button id="okay"   >4</button>
-      <button id="great"  >5</button>
+  <!-- Spencer's Backend Page -->
+<div>
+  <!-- Header -->
+  <div class="uk-container">
+    <h2 class="uk-text-center">Vibe Check-In!</h2>
+  </div>
+
+  <!-- all other page content -->
+  <div id="content-wrap" class="uk-container">
+    <img class="uk-align-center" id="chick-start" src="chicken-logo.png"></img>
+
+    <h2 class="uk-text-center">How are you feeling?</h2>
+    <div id="checkin_buttons" class="uk-button-group">
+      <button id="bad"    class="uk-button uk-button-default uk-button-small">1</button>
+      <button id="poor"   class="uk-button uk-button-default uk-button-small">2</button>
+      <button id="decent" class="uk-button uk-button-default uk-button-small">3</button>
+      <button id="okay"   class="uk-button uk-button-default uk-button-small">4</button>
+      <button id="great"  class="uk-button uk-button-default uk-button-small">5</button>
     </div>
-    <h2 id="time">0:00</h2>
-    <button id="time_start">Start!</button>
+
+    <h2 id="time" class="uk-text-center">00:00</h2>
+  </div>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="uk-container">
+      <button id="time_start" class="uk-button uk-button-default uk-align-center">start</button>
+  </div>
+  </footer>
+</div>
 </body>
 </html>
