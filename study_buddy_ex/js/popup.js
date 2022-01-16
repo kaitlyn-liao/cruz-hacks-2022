@@ -115,6 +115,7 @@ function refreshTimer(){
 vibe = null;
 
 function vibe_check(v){
+  changePage("vibe");
   // get form from html
   // pass into function
   // if statements
