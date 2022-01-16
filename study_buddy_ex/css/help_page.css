@@ -1,0 +1,19 @@
+#chick-help {
+    width: 40%;
+    height: 40%;
+}
+
+#help-box{
+    background-color: #fcc863;
+    border-radius: 30px 30px 30px 0px; 
+    width: 250px;
+    height: 360px;
+    max-width: 250px;
+    max-height: 360px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 7px;
+    overflow-y: scroll;
+}
