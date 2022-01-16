@@ -6,8 +6,8 @@
   <link rel="stylesheet" href="popup.css">
   <link rel="stylesheet" href="landing_page.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.10.0/css/uikit-core.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.10.0/js/uikit.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.10.0/js/uikit-icons.min.js" defer></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.10.0/js/uikit.min.js" defer></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.10.0/js/uikit-icons.min.js" defer></script> -->
 </head>
 
 <body>
@@ -38,7 +38,12 @@
   <!-- Footer -->
   <footer id="footer">
     <div class="uk-container">
-      <button id="time_start" class="uk-button uk-button-default uk-align-center">start</button>
+      <div class="uk-button-group">
+        <button id="time_start" class="uk-button uk-button-default uk-button-small">start</button>
+        <button id="time_end"   class="uk-button uk-button-default uk-button-small">end</button>
+        <button id="time_pause" class="uk-button uk-button-default uk-button-small">pause</button>
+        <button id="time_resume"class="uk-button uk-button-default uk-button-small">resume</button>
+      </div>
   </div>
   </footer>
 </div>
