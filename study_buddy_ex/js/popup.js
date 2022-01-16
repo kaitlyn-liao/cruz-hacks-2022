@@ -38,7 +38,7 @@ function refreshDisplay(){
 
     if(bgpage.is_study == true)       { document.getElementById("is_work").innerHTML = "Study Time"; }
     else if(bgpage.is_study == false) { document.getElementById("is_work").innerHTML = "Break Time"; }
-    if(bgpage.is_timing == false)       { document.getElementById("is_work").innerHTML = "No Timer Set";}
+    if(bgpage.is_timing == false)     { document.getElementById("is_work").innerHTML = "No Timer Set";}
 
     refreshDisplayTimeout = setTimeout(refreshDisplay, 1000);
   }
@@ -51,6 +51,9 @@ function hide(id){
 
 function show(id){
   document.getElementById(id).style.display = "inline";
+  // if(id == "help"){
+  //   vibe_answer(bgpage.vibe);
+  // }
 }
 
 function landtoform(){
@@ -77,11 +80,11 @@ var break_sec;
 var curr_page;
 
 function initTimer(){
-  work_sec = 10;
-  break_sec = 5;
-  // work_sec = document.getElementById('study-intv').value * 60;
-  // break_sec = document.getElementById('break-intv').value * 60;
-  // alert(work_sec + " " + break_sec);
+  // work_sec = 10;
+  // break_sec = 5;
+  work_sec = document.getElementById('study-intv').value * 60;
+  break_sec = document.getElementById('break-intv').value * 60;
+
   bgpage.set_work_duration(work_sec);
   bgpage.set_break_duration(break_sec);
 
@@ -137,26 +140,39 @@ vibe = null;
 function check_in(){
   bgpage.set_is_vibing(true);
   changePage("vibe");
-
-  // prompt user to fill out vibe check
-  // take in input response
-  // based on input, give suggestions or pos reinforcement 
-  // prompt user to start break
 }
 
-function vibe_answer_sad(){ vibe_answer("sad"); }
-function vibe_answer_meh(){ vibe_answer("meh"); }
-function vibe_answer_hap(){ vibe_answer("hap"); }
+function vibe_answer_sad(){ changePage("help"); vibe_answer("sad"); }
+function vibe_answer_meh(){ changePage("help"); vibe_answer("meh"); }
+function vibe_answer_hap(){ changePage("help"); vibe_answer("hap"); }
 
 function vibe_answer(v){
-  changePage("help");
+  bgpage.set_vibe(v);
 
-  if(v == "sad"){ alert("sad"); }
-  if(v == "meh"){ alert("meh for meditation"); meh_help(); }
-  if(v == "hap"){ alert("hap"); }
-  
-  
+  if(bgpage.vibe == "sad"){ alert("sad"); }
+  if(bgpage.vibe == "meh"){ meh_help(); }
+  if(bgpage.vibe == "hap"){ hap_page(); }
+
   // display next page and associated buttons to move on
+}
+
+function hap_page(){
+  var hapHTML = "";
+
+  // document.getElementById("innerline").innerHTML = 
+  corgiIMG = "<img id='corgi' style='border-radius: 10px;' src='./img/corgi.png'/>"
+  hapText = 
+    "I'm so glad your study session is going well! " +
+    "Remember that productivity isn't whats important, mentally HEALTHY productivity is! <br><br>" +
+    "Take this break to grab a snack, refill your water bottle, and take a lap around the house. " +
+    "All of these tasks are a great way to keep your energy and your mood up, and avoid getting bogged down. " +
+    "<br><br>To congratulate your positive work, here's a corgi!<br><br>" +
+    corgiIMG + 
+    "<br><br>You're doing so well! Don't cluck up now!";
+  hapTextStyle = "<div class='uk-text-center uk-text-default uk-text-secondary'> " + hapText + "</div>";
+
+  hapHTML += hapTextStyle;
+  document.getElementById("help-hap-content").innerHTML = hapHTML;
 }
 
 function meh_help() {
@@ -184,12 +200,13 @@ function meh_help() {
 function return_time(){
   changePage("time_page");
   bgpage.set_is_vibing(false);
-  bgpage.set_is_study(!bgpage.is_study);
+  bgpage.set_is_study(false);
   bgpage.set_alarm(bgpage.is_study);
 }
 
 // need to make buttons and listeners for this
 function return_land(){
+  bgpage.set_is_vibing(false);
+  bgpage.kill_alarm();
   changePage("land");
-  killTimer();
 }
