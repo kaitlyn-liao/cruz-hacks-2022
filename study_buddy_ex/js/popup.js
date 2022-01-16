@@ -51,9 +51,9 @@ function hide(id){
 
 function show(id){
   document.getElementById(id).style.display = "inline";
-  if(id == "help"){
-    vibe_answer(bgpage.vibe);
-  }
+  // if(id == "help"){
+  //   vibe_answer(bgpage.vibe);
+  // }
 }
 
 function landtoform(){
@@ -173,7 +173,7 @@ function hap_page(){
 
   hapHTML += hapTextStyle;
   document.getElementById("help-hap-content").innerHTML = hapHTML;
-
+}
 
 function meh_help() {
   var mehHTML = '';
