@@ -1,45 +1,71 @@
 <!doctype html>
 <html>
+
 <head>
   <title>checkin chicken</title>
-  <script src="popup.js"></script>
-  <link rel="stylesheet" href="popup.css">
-  <link rel="stylesheet" href="landing_page.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.10.0/css/uikit-core.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.10.0/js/uikit.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.10.0/js/uikit-icons.min.js" defer></script>
+  <script src="./js/popup.js"></script>
+  <link rel="stylesheet" href="./css/popup.css">
+  <link rel="stylesheet" href="./css/landing_page.css">
+  <link rel="stylesheet" href="./css/form_page.css">
+  <link rel="stylesheet" href="./css/uikit-3.10.0/css/uikit.min.css" />
+  <script src="./css/uikit-3.10.0/js/uikit.min.js"></script>
+  <script src="./css/uikit-3.10.0/js/uikit-icons.min.js"></script>
 </head>
 
 <body>
-  <!-- Spencer's Backend Page -->
-<div>
-  <!-- Header -->
-  <div class="uk-container">
-    <h2 class="uk-text-center">Vibe Check-In!</h2>
-  </div>
-
-  <!-- all other page content -->
-  <div id="content-wrap" class="uk-container">
-    <img class="uk-align-center" id="chick-start" src="chicken-logo.png"></img>
-
-    <h2 class="uk-text-center">How are you feeling?</h2>
-    <div id="checkin_buttons" class="uk-button-group">
-      <button id="bad"    class="uk-button uk-button-default uk-button-small">1</button>
-      <button id="poor"   class="uk-button uk-button-default uk-button-small">2</button>
-      <button id="decent" class="uk-button uk-button-default uk-button-small">3</button>
-      <button id="okay"   class="uk-button uk-button-default uk-button-small">4</button>
-      <button id="great"  class="uk-button uk-button-default uk-button-small">5</button>
+  <!-- Form Page -->
+  <div>
+    <!-- Header -->
+    <div class="uk-container">
+      <!-- <h2 class="uk-text-center">Check In Chicken</h2> -->
     </div>
 
-    <h2 id="time" class="uk-text-center">00:00</h2>
-  </div>
-
-  <!-- Footer -->
-  <footer id="footer">
+    <!-- all other page content -->
+    <!-- id="content-wrap" -->
     <div class="uk-container">
-      <button id="time_start" class="uk-button uk-button-default uk-align-center">start</button>
+      <div class="uk-align-right uk-margin-remove">
+        <div id="form-box">
+          <h3 class="uk-text-center">Set Your Study Timer </h3>
+          <br>
+
+          <p class="uk-text-center uk-text-large uk-text-secondary">study for...</p>
+          <div>
+            <button class="uk-button uk-button-default uk-button-default uk-align-center"
+              style="background-color: antiquewhite;" type="button">30 min</button>
+            <div uk-dropdown="pos: bottom-center">
+              <ul class="uk-nav uk-dropdown-nav uk-margin-remove">
+                <li><a href="#">15 min</a></li>
+                <li><a href="#">30 min</a></li>
+                <li><a href="#">45 min</a></li>
+                <li><a href="#">60 min</a></li>
+              </ul>
+            </div>
+          </div>
+          <p class="uk-text-center uk-text-large uk-text-secondary">break for...</p>
+          <div>
+            <button class="uk-button uk-button-default uk-button-default uk-align-center"
+              style="background-color: antiquewhite;" type="button">5 min</button>
+            <div uk-dropdown="pos: bottom-center">
+              <ul class="uk-nav uk-dropdown-nav uk-margin-remove">
+                <li><a href="#">2 min</a></li>
+                <li><a href="#">5 min</a></li>
+                <li><a href="#">10 min</a></li>
+                <li><a href="#">15 min</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img id="chick-form" src="./img/chicken-logo.png"></img>
+    </div>
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="uk-container">
+        <button class="uk-button uk-button-small uk-button-default uk-align-right"
+          style="background-color: antiquewhite;" type="button">START</button>
+      </div>
+    </footer>
   </div>
-  </footer>
-</div>
 </body>
+
 </html>
