@@ -21,7 +21,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function refreshDisplay(){
   refreshTimer();
-  // changePage(bgpage.showpageID);
+
+  // if(bgpage.is_study == true && bgpage.user_timer_seconds == 0){ vibe_check(); }
+  if( (document.getElementById("time").innerHTML == "0:00") && (bgpage.is_vibing == true) ){
+    vibe_check();
+  }
+  // var timeDisplay = document.getElementById("time");
+  // timeDisplay.innerHTML = msg;
+
+  if(bgpage.is_study == true)       { document.getElementById("is_work").innerHTML = "Study Time"; }
+  else if(bgpage.is_study == false) { document.getElementById("is_work").innerHTML = "Break Time"; }
+  if(bgpage.is_timing == false)       { document.getElementById("is_work").innerHTML = "No Timer Set";}
+
+  refreshDisplayTimeout = setTimeout(refreshDisplay, 1000);
+
   // any other common displays we need to update
 }
 
@@ -69,7 +82,7 @@ function initTimer(){
 }
 
 function startTimer(){
-  bgpage.set_alarm(is_working);
+  bgpage.set_alarm(true);
   refreshDisplay();
 }
 
@@ -104,23 +117,24 @@ function refreshTimer(){
   var timeDisplay = document.getElementById("time");
   timeDisplay.innerHTML = msg;
 
-  refreshDisplayTimeout = setTimeout(refreshDisplay, 1000);
-
-  if(bgpage.is_working == true){ document.getElementById("is_work").innerHTML = "Study Time"; }
-  else if(bgpage.is_working == false) { document.getElementById("iswork").innerHTML = "Break Time"; }
-
 }
 
 // =================================== VIBE CHECK
 vibe = null;
 
-function vibe_check(v){
-  // get form from html
-  // pass into function
-  // if statements
-  // 1 -- bad
-  // 5 -- great
-  vibe = v;
-  console.log(vibe)
+function vibe_check(){
+  bgpage.set_is_vibing(true);
+  alert("vibe check");
+  changePage("vibe");
+
+  // prompt user to fill out vibe check
+  // take in input response
+  // based on input, give suggestions or pos reinforcement 
+  // prompt user to start break
+
+  // bgpage.vibe_check();
+  bgpage.set_is_vibing(false);
+  bgpage.set_is_study(! bgpage.is_study);
+  bgpage.set_alarm(bgpage.is_study);
 }
 
