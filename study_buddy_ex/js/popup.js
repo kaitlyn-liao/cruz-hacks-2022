@@ -10,12 +10,12 @@ document.addEventListener("DOMContentLoaded", function() {
   ev = document.getElementById("time_pause");  ev.addEventListener("click", pauseTimer, false);
   ev = document.getElementById("land-start");  ev.addEventListener("click", landtoform, false);
 
-  ev = document.getElementById("vibe-sad");   ev.addEventListener("click", vibe_answer_sad, false);
-  ev = document.getElementById("vibe-meh");   ev.addEventListener("click", vibe_answer_meh, false);
-  ev = document.getElementById("vibe-hap");   ev.addEventListener("click", vibe_answer_hap, false);
+  ev = document.getElementById("vibe-buttons vibe-sad");   ev.addEventListener("click", vibe_answer_sad, false);
+  ev = document.getElementById("vibe-buttons vibe-meh");   ev.addEventListener("click", vibe_answer_meh, false);
+  ev = document.getElementById("vibe-buttons vibe-hap");   ev.addEventListener("click", vibe_answer_hap, false);
 
-  ev = document.getElementById("landbut");   ev.addEventListener("click", return_land, false);
-  ev = document.getElementById("timebut");   ev.addEventListener("click", return_time, false);
+  ev = document.getElementById("time_land");  ev.addEventListener("click", return_land, false);
+  ev = document.getElementById("time_break"); ev.addEventListener("click", return_time, false);
 
   // refreshDisplay();
   if(bgpage.showpageID != ""){
@@ -63,6 +63,7 @@ function changePage(showID){
   hide("form");
   hide("time_page");
   hide("vibe");
+  hide("help")
 
   bgpage.set_showpageID(showID);
   show(showID);
@@ -148,9 +149,12 @@ function vibe_answer_meh(){ vibe_answer("meh"); }
 function vibe_answer_hap(){ vibe_answer("hap"); }
 
 function vibe_answer(v){
+  changePage("help");
+
   if(v == "sad"){ alert("sad"); }
   if(v == "meh"){ alert("meh"); }
   if(v == "hap"){ alert("hap"); }
+  
   
   // display next page and associated buttons to move on
 }
