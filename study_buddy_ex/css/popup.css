@@ -11,6 +11,40 @@ html {
 } */
 
 
+#vibe-sad {
+    display: inline-block;
+    height: 75px;
+    width: 75px;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+    border-radius: 50%;
+}
+
+#vibe-meh {
+    display: inline-block;
+    height: 75px;
+    width: 75px;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+    border-radius: 50%;
+}
+
+#vibe-hap {
+    display: inline-block;
+    height: 75px;
+    width: 75px;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+    border-radius: 50%;
+}
+  
+  #vibe-buttons-div {
+    text-align: center;
+}
+
 #page-container {
     position: relative;
     min-height: 100vh;
