@@ -3,18 +3,25 @@ var bgpage = chrome.extension.getBackgroundPage();
 // ====================================================================== EVENTS 
 
 document.addEventListener("DOMContentLoaded", function() {
+  // alert("init");
   ev = document.getElementById("time_start");  ev.addEventListener("click", initTimer, false);
   ev = document.getElementById("time_end");    ev.addEventListener("click", killTimer, false);
   ev = document.getElementById("time_resume"); ev.addEventListener("click", resumeTimer, false);
   ev = document.getElementById("time_pause");  ev.addEventListener("click", pauseTimer, false);
-
-  refreshDisplay();
+  ev = document.getElementById("land-start");  ev.addEventListener("click", landtoform, false);
+  // refreshDisplay();
+  if(bgpage.showpageID != ""){
+    changePage(bgpage.showpageID);
+  }
 });
+
+
 
 // ====================================================================== DISPLAY 
 
 function refreshDisplay(){
   refreshTimer();
+  // changePage(bgpage.showpageID);
   // any other common displays we need to update
 }
 
@@ -26,14 +33,38 @@ function show(id){
   document.getElementById(id).style.display = "inline";
 }
 
+function landtoform(){
+  changePage("form")
+}
+
+function changePage(showID){
+  // alert("in change page " + showID);
+  hide("land");
+  hide("form");
+  hide("time_page");
+  hide("vibe");
+
+  bgpage.set_showpageID(showID);
+  show(showID);
+  // curr_page = showID;
+  // alert("change page:" + curr_page)
+  refreshDisplay();
+}
+
 // ====================================================================== TIMERS
 is_working = true;
-work_sec = 20;
-break_sec = 10;
+var work_sec;
+var break_sec;
+var curr_page;
 
 function initTimer(){
+  work_sec = document.getElementById('study-intv').value * 60;
+  break_sec = document.getElementById('break-intv').value * 60;
+  // alert(work_sec + " " + break_sec);
   bgpage.set_work_duration(work_sec)
   bgpage.set_break_duration(break_sec)
+
+  changePage("time_page");
   startTimer();
 }
 
@@ -44,6 +75,7 @@ function startTimer(){
 
 function killTimer(){
   bgpage.kill_alarm();
+  changePage("vibe");
   refreshDisplay();
 }
 
@@ -74,7 +106,7 @@ function refreshTimer(){
 
   refreshDisplayTimeout = setTimeout(refreshDisplay, 1000);
 
-  if(bgpage.is_working == true){ document.getElementById("iswork").innerHTML = "Study Time"; }
+  if(bgpage.is_working == true){ document.getElementById("is_work").innerHTML = "Study Time"; }
   else if(bgpage.is_working == false) { document.getElementById("iswork").innerHTML = "Break Time"; }
 
 }

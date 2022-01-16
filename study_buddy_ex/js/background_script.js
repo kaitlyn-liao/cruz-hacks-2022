@@ -1,6 +1,11 @@
 // background scripting
 
-chrome.runtime.onInstalled.addListener(function() { alert("Check-In Chicken is installed!"); });
+// chrome.runtime.onInstalled.addListener(function() { alert("Check-In Chicken is installed!"); });
+
+var showpageID = "";
+function set_showpageID(p){
+    showpageID = p;
+}
 
 // ====================================================================== TIMERS
 // globals
