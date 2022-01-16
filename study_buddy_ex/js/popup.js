@@ -51,6 +51,9 @@ function hide(id){
 
 function show(id){
   document.getElementById(id).style.display = "inline";
+  if(id == "help"){
+    vibe_answer(bgpage.vibe);
+  }
 }
 
 function landtoform(){
@@ -137,26 +140,41 @@ vibe = null;
 function check_in(){
   bgpage.set_is_vibing(true);
   changePage("vibe");
-
-  // prompt user to fill out vibe check
-  // take in input response
-  // based on input, give suggestions or pos reinforcement 
-  // prompt user to start break
 }
 
-function vibe_answer_sad(){ vibe_answer("sad"); }
-function vibe_answer_meh(){ vibe_answer("meh"); }
-function vibe_answer_hap(){ vibe_answer("hap"); }
+function vibe_answer_sad(){ changePage("help"); vibe_answer("sad"); }
+function vibe_answer_meh(){ changePage("help"); vibe_answer("meh"); }
+function vibe_answer_hap(){ changePage("help"); vibe_answer("hap"); }
 
 function vibe_answer(v){
-  changePage("help");
+  bgpage.set_vibe(v);
 
-  if(v == "sad"){ alert("sad"); }
-  if(v == "meh"){ alert("meh"); }
-  if(v == "hap"){ alert("hap"); }
-  
+  if(bgpage.vibe == "sad"){ alert("sad"); }
+  if(bgpage.vibe == "meh"){ alert("meh"); }
+  if(bgpage.vibe == "hap"){ hap_page(); }
   
   // display next page and associated buttons to move on
+}
+
+function hap_page(){
+  var hapHTML = "";
+
+  // document.getElementById("innerline").innerHTML = 
+  corgiIMG = "<img id='corgi' style='border-radius: 10px;' src='./img/corgi.png'/>"
+  hapText = 
+    "I'm so glad your study session is going well! " +
+    "Remember that productivity isn't whats important, mentally HEALTHY productivity is! <br><br>" +
+    "Take this break to grab a snack, refill your water bottle, and take a lap around the house. " +
+    "All of these tasks are a great way to keep your energy and your mood up, and avoid getting bogged down. " +
+    "<br><br>To congratulate your positive work, here's a corgi!<br><br>" +
+    corgiIMG + 
+    "<br><br>You're doing so well! Don't cluck up now!";
+  hapTextStyle = "<div class='uk-text-center uk-text-default uk-text-secondary'> " + hapText + "</div>";
+
+  hapHTML += hapTextStyle;
+  document.getElementById("help-hap-content").innerHTML = hapHTML;
+
+
 }
 
 // need to make buttons and listeners for this
