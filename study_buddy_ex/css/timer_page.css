@@ -1,0 +1,30 @@
+#chick-timer-container {
+    padding-top: 50px;
+}
+
+#chick-timer {
+    max-height: 30%;
+    max-width: 30%;
+}
+
+#timer-circle {
+    width: 200px;
+    height: 200px;
+    /* line-height: 175px; */
+    border-radius: 50%;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    background: #fcc863
+}
+
+#timer-text {
+    background-color: #fcc863;
+    border-radius: 20px 20px 20px 0px; 
+    width: 150px;
+    height: 50px;
+    max-width: 150px;
+    max-height: 50px;
+    padding: 10px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
