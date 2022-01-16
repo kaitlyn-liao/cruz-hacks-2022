@@ -5,9 +5,9 @@ html {
     /* padding-bottom: 5%; */
 }
 
-body {
-    /* overflow-y: hidden; */
-}
+/* body {
+    overflow-y: hidden;
+} */
 
 
 #page-container {
@@ -30,4 +30,3 @@ body {
     margin-top: 5%;
     margin-bottom: 5%;
 }
-
