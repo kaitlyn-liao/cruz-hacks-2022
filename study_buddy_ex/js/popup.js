@@ -5,36 +5,43 @@ var bgpage = chrome.extension.getBackgroundPage();
 document.addEventListener("DOMContentLoaded", function() {
   // alert("init");
   ev = document.getElementById("time_start");  ev.addEventListener("click", initTimer, false);
-  ev = document.getElementById("time_end");    ev.addEventListener("click", killTimer, false);
+  ev = document.getElementById("time_end");    ev.addEventListener("click", handle_kill, false);
   ev = document.getElementById("time_resume"); ev.addEventListener("click", resumeTimer, false);
   ev = document.getElementById("time_pause");  ev.addEventListener("click", pauseTimer, false);
   ev = document.getElementById("land-start");  ev.addEventListener("click", landtoform, false);
+
+  ev = document.getElementById("vibe-sad");   ev.addEventListener("click", vibe_answer_sad, false);
+  ev = document.getElementById("vibe-meh");   ev.addEventListener("click", vibe_answer_meh, false);
+  ev = document.getElementById("vibe-hap");   ev.addEventListener("click", vibe_answer_hap, false);
+
+  ev = document.getElementById("time_land");  ev.addEventListener("click", return_land, false);
+  ev = document.getElementById("time_break"); ev.addEventListener("click", return_time, false);
+
   // refreshDisplay();
   if(bgpage.showpageID != ""){
     changePage(bgpage.showpageID);
   }
 });
 
-
-
 // ====================================================================== DISPLAY 
 
 function refreshDisplay(){
-  refreshTimer();
 
-  // if(bgpage.is_study == true && bgpage.user_timer_seconds == 0){ vibe_check(); }
-  if( (document.getElementById("time").innerHTML == "0:00") && (bgpage.is_vibing == true) ){
-    vibe_check();
+  if(!bgpage.is_vibing){
+    refreshTimer();
+
+    if( (document.getElementById("time").innerHTML == "0:00") && (bgpage.is_vibing == true) ){
+      check_in();
+    }
+    // var timeDisplay = document.getElementById("time");
+    // timeDisplay.innerHTML = msg;
+
+    if(bgpage.is_study == true)       { document.getElementById("is_work").innerHTML = "Study Time"; }
+    else if(bgpage.is_study == false) { document.getElementById("is_work").innerHTML = "Break Time"; }
+    if(bgpage.is_timing == false)     { document.getElementById("is_work").innerHTML = "No Timer Set";}
+
+    refreshDisplayTimeout = setTimeout(refreshDisplay, 1000);
   }
-  // var timeDisplay = document.getElementById("time");
-  // timeDisplay.innerHTML = msg;
-
-  if(bgpage.is_study == true)       { document.getElementById("is_work").innerHTML = "Study Time"; }
-  else if(bgpage.is_study == false) { document.getElementById("is_work").innerHTML = "Break Time"; }
-  if(bgpage.is_timing == false)       { document.getElementById("is_work").innerHTML = "No Timer Set";}
-
-  refreshDisplayTimeout = setTimeout(refreshDisplay, 1000);
-
   // any other common displays we need to update
 }
 
@@ -44,6 +51,9 @@ function hide(id){
 
 function show(id){
   document.getElementById(id).style.display = "inline";
+  // if(id == "help"){
+  //   vibe_answer(bgpage.vibe);
+  // }
 }
 
 function landtoform(){
@@ -56,11 +66,10 @@ function changePage(showID){
   hide("form");
   hide("time_page");
   hide("vibe");
+  hide("help")
 
   bgpage.set_showpageID(showID);
   show(showID);
-  // curr_page = showID;
-  // alert("change page:" + curr_page)
   refreshDisplay();
 }
 
@@ -71,11 +80,13 @@ var break_sec;
 var curr_page;
 
 function initTimer(){
+  // work_sec = 10;
+  // break_sec = 5;
   work_sec = document.getElementById('study-intv').value * 60;
   break_sec = document.getElementById('break-intv').value * 60;
-  // alert(work_sec + " " + break_sec);
-  bgpage.set_work_duration(work_sec)
-  bgpage.set_break_duration(break_sec)
+
+  bgpage.set_work_duration(work_sec);
+  bgpage.set_break_duration(break_sec);
 
   changePage("time_page");
   startTimer();
@@ -86,9 +97,13 @@ function startTimer(){
   refreshDisplay();
 }
 
+function handle_kill(){
+  changePage("vibe");
+}
+
 function killTimer(){
   bgpage.kill_alarm();
-  changePage("vibe");
+  bgpage.set_is_vibing(true);
   refreshDisplay();
 }
 
@@ -122,19 +137,76 @@ function refreshTimer(){
 // =================================== VIBE CHECK
 vibe = null;
 
-function vibe_check(){
+function check_in(){
   bgpage.set_is_vibing(true);
-  alert("vibe check");
   changePage("vibe");
+}
 
-  // prompt user to fill out vibe check
-  // take in input response
-  // based on input, give suggestions or pos reinforcement 
-  // prompt user to start break
+function vibe_answer_sad(){ changePage("help"); vibe_answer("sad"); }
+function vibe_answer_meh(){ changePage("help"); vibe_answer("meh"); }
+function vibe_answer_hap(){ changePage("help"); vibe_answer("hap"); }
 
-  // bgpage.vibe_check();
+function vibe_answer(v){
+  bgpage.set_vibe(v);
+
+  if(bgpage.vibe == "sad"){ alert("sad"); }
+  if(bgpage.vibe == "meh"){ meh_help(); }
+  if(bgpage.vibe == "hap"){ hap_page(); }
+
+  // display next page and associated buttons to move on
+}
+
+function hap_page(){
+  var hapHTML = "";
+
+  // document.getElementById("innerline").innerHTML = 
+  corgiIMG = "<img id='corgi' style='border-radius: 10px;' src='./img/corgi.png'/>"
+  hapText = 
+    "I'm so glad your study session is going well! " +
+    "Remember that productivity isn't whats important, mentally HEALTHY productivity is! <br><br>" +
+    "Take this break to grab a snack, refill your water bottle, and take a lap around the house. " +
+    "All of these tasks are a great way to keep your energy and your mood up, and avoid getting bogged down. " +
+    "<br><br>To congratulate your positive work, here's a corgi!<br><br>" +
+    corgiIMG + 
+    "<br><br>You're doing so well! Don't cluck up now!";
+  hapTextStyle = "<div class='uk-text-center uk-text-default uk-text-secondary'> " + hapText + "</div>";
+
+  hapHTML += hapTextStyle;
+  document.getElementById("help-hap-content").innerHTML = hapHTML;
+}
+
+function meh_help() {
+  var mehHTML = '';
+
+  mehText = "Sorry things aren't going as good as they could be. " +  
+            "Hopefully this break gives you a chance to reset. " + 
+            "In fact, a great way to reset is by doing some meditation. " +
+            "<br><br>Let your mind clear and body relax. Focus on your breathing. " + 
+            "In through your nose. Out through your mouth. " + 
+            "Do that a couple times and you will feel refreshed and ready to take on whatever's next." + 
+            "<br><br>Try listening to this Spotify playlist while on your break! <br><br>";
+
+  mehTextStyle = "<div class='uk-text-center uk-text-default uk-text-secondary'>" + mehText + "</div>";
+  iframeHTML = "<iframe src='https://open.spotify.com/embed/playlist/37i9dQZF1DWZqd5JICZI0u?utm_source=generator' width='100%' height='250' frameBorder='0' allowfullscreen='' allow= 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' style='border-radius: 10px;'></iframe>";
+  
+  mehHTML += mehTextStyle; 
+  mehHTML += iframeHTML;
+
+  help_div_id = document.getElementById('help-meh-content');
+  help_div_id.innerHTML = mehHTML;
+}
+
+// need to make buttons and listeners for this
+function return_time(){
+  changePage("time_page");
   bgpage.set_is_vibing(false);
-  bgpage.set_is_study(! bgpage.is_study);
+  bgpage.set_is_study(false);
   bgpage.set_alarm(bgpage.is_study);
 }
 
+// need to make buttons and listeners for this
+function return_land(){
+  bgpage.set_is_vibing(false);
+  bgpage.kill_alarm();
+  changePage("land");
+}
