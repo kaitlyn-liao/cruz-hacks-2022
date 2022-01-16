@@ -51,6 +51,7 @@ function kill_alarm(){
     is_paused = false;
     is_study = false;
     is_timing = false;
+    is_vibing = false;
     clearInterval(alarmRingTimeout);
 }
 
@@ -97,14 +98,14 @@ function turnOff(){
 
 // ====================================================================== VIBE CHECK
 var is_vibing = false;
-var next_page = "";
+var vibe = "";
 
 function set_is_vibing(v){
     is_vibing = v;
 }
 
-function set_next_page(id){
-    next_page = id;
+function set_vibe(v){
+    vibe = v;
 }
 
 // function vibe_check(){

@@ -5,14 +5,18 @@ var bgpage = chrome.extension.getBackgroundPage();
 document.addEventListener("DOMContentLoaded", function() {
   // alert("init");
   ev = document.getElementById("time_start");  ev.addEventListener("click", initTimer, false);
-  ev = document.getElementById("time_end");    ev.addEventListener("click", killTimer, false);
+  ev = document.getElementById("time_end");    ev.addEventListener("click", handle_kill, false);
   ev = document.getElementById("time_resume"); ev.addEventListener("click", resumeTimer, false);
   ev = document.getElementById("time_pause");  ev.addEventListener("click", pauseTimer, false);
   ev = document.getElementById("land-start");  ev.addEventListener("click", landtoform, false);
 
-  ev = document.getElementById("vibe-sad");   ev.addEventListener("click", vibe_answer_sad, false);
-  ev = document.getElementById("vibe-meh");   ev.addEventListener("click", vibe_answer_meh, false);
-  ev = document.getElementById("vibe-hap");   ev.addEventListener("click", vibe_answer_hap, false);
+  ev = document.getElementById("vibe-buttons vibe-sad");   ev.addEventListener("click", vibe_answer_sad, false);
+  ev = document.getElementById("vibe-buttons vibe-meh");   ev.addEventListener("click", vibe_answer_meh, false);
+  ev = document.getElementById("vibe-buttons vibe-hap");   ev.addEventListener("click", vibe_answer_hap, false);
+
+  ev = document.getElementById("time_land");  ev.addEventListener("click", return_land, false);
+  ev = document.getElementById("time_break"); ev.addEventListener("click", return_time, false);
+
   // refreshDisplay();
   if(bgpage.showpageID != ""){
     changePage(bgpage.showpageID);
@@ -59,11 +63,10 @@ function changePage(showID){
   hide("form");
   hide("time_page");
   hide("vibe");
+  hide("help")
 
   bgpage.set_showpageID(showID);
   show(showID);
-  // curr_page = showID;
-  // alert("change page:" + curr_page)
   refreshDisplay();
 }
 
@@ -91,11 +94,13 @@ function startTimer(){
   refreshDisplay();
 }
 
+function handle_kill(){
+  changePage("vibe");
+}
+
 function killTimer(){
   bgpage.kill_alarm();
   bgpage.set_is_vibing(true);
-  bgpage.set_next_page("land")
-  changePage("vibe");
   refreshDisplay();
 }
 
@@ -131,9 +136,7 @@ vibe = null;
 
 function check_in(){
   bgpage.set_is_vibing(true);
-  // alert("vibe check");
   changePage("vibe");
-  bgpage.set_next_page("time_page");
 
   // prompt user to fill out vibe check
   // take in input response
@@ -141,26 +144,31 @@ function check_in(){
   // prompt user to start break
 }
 
-function vibe_answer_sad(){
-  vibe_answer("sad");
-}
-
-function vibe_answer_meh(){
-  vibe_answer("meh");
-}
-
-function vibe_answer_hap(){
-  vibe_answer("hap");
-}
+function vibe_answer_sad(){ vibe_answer("sad"); }
+function vibe_answer_meh(){ vibe_answer("meh"); }
+function vibe_answer_hap(){ vibe_answer("hap"); }
 
 function vibe_answer(v){
+  changePage("help");
+
   if(v == "sad"){ alert("sad"); }
-  if(v == "meh"){ alert("meh");}
-  if(v == "hap"){ alert("hap");}
+  if(v == "meh"){ alert("meh"); }
+  if(v == "hap"){ alert("hap"); }
   
+  
+  // display next page and associated buttons to move on
+}
+
+// need to make buttons and listeners for this
+function return_time(){
+  changePage("time_page");
   bgpage.set_is_vibing(false);
-  // changePage("time_page");
   bgpage.set_is_study(!bgpage.is_study);
   bgpage.set_alarm(bgpage.is_study);
 }
 
+// need to make buttons and listeners for this
+function return_land(){
+  changePage("land");
+  killTimer();
+}
