@@ -68,7 +68,7 @@ function ringIn(tMillis){
 
     alarmRingTimeout = setInterval( 
         function(){
-            if(!is_paused){
+            if(!is_paused || is_vibing){
                 console.log(is_paused);
                 console.log(user_timer_seconds);
                 if(user_timer_seconds > 0){ user_timer_seconds--; }
@@ -78,7 +78,7 @@ function ringIn(tMillis){
 }
 
 function ring(){
-    alert("ring ring ring ring")
+    alert("Study time is over! Good Work!")
     turnOff();
 }
 
@@ -95,11 +95,16 @@ function turnOff(){
 
 }
 
-// ====================================================================== TIMERS
+// ====================================================================== VIBE CHECK
 var is_vibing = false;
+var next_page = "";
 
 function set_is_vibing(v){
     is_vibing = v;
+}
+
+function set_next_page(id){
+    next_page = id;
 }
 
 // function vibe_check(){
