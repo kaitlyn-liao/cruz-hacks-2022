@@ -10,9 +10,9 @@ document.addEventListener("DOMContentLoaded", function() {
   ev = document.getElementById("time_pause");  ev.addEventListener("click", pauseTimer, false);
   ev = document.getElementById("land-start");  ev.addEventListener("click", landtoform, false);
 
-  ev = document.getElementById("vibe-buttons vibe-sad");   ev.addEventListener("click", vibe_answer_sad, false);
-  ev = document.getElementById("vibe-buttons vibe-meh");   ev.addEventListener("click", vibe_answer_meh, false);
-  ev = document.getElementById("vibe-buttons vibe-hap");   ev.addEventListener("click", vibe_answer_hap, false);
+  ev = document.getElementById("vibe-sad");   ev.addEventListener("click", vibe_answer_sad, false);
+  ev = document.getElementById("vibe-meh");   ev.addEventListener("click", vibe_answer_meh, false);
+  ev = document.getElementById("vibe-hap");   ev.addEventListener("click", vibe_answer_hap, false);
 
   ev = document.getElementById("time_land");  ev.addEventListener("click", return_land, false);
   ev = document.getElementById("time_break"); ev.addEventListener("click", return_time, false);
