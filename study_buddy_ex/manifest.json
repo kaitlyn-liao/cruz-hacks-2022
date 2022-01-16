@@ -7,7 +7,7 @@
 
   
     "browser_action": {
-     "default_icon": "agap.png",
+     "default_icon": "./img/chicken-logo.png",
      "default_popup": "popup.html"
     },
 
