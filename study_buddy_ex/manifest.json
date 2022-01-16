@@ -7,12 +7,12 @@
 
   
     "browser_action": {
-     "default_icon": "chicken-logo.png",
+     "default_icon": "./img/chicken-logo.png",
      "default_popup": "popup.html"
     },
 
     "background": {
-     "scripts": ["background_script.js"]
+     "scripts": ["./js/background_script.js"]
     },
 
     "permissions": [

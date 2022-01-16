@@ -1,41 +1,46 @@
 <!doctype html>
 <html>
+
 <head>
   <title>checkin chicken</title>
-  <script src="popup.js"></script>
-  <link rel="stylesheet" href="popup.css">
-  <link rel="stylesheet" href="landing_page.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.10.0/css/uikit-core.min.css" />
+  <script src="./js/popup.js"></script>
+  <link rel="stylesheet" href="./css/popup.css">
+  <link rel="stylesheet" href="./css/landing_page.css">
+  <link rel="stylesheet" href="./css/form_page.css">
+  <link rel="stylesheet" href="./css/timer_page.css">
+  <link rel="stylesheet" href="./css/vibecheck.css">
+  <link rel="stylesheet" href="./css/uikit-3.10.0/css/uikit.min.css" />
+  <script src="./css/uikit-3.10.0/js/uikit.min.js"></script>
+  <script src="./css/uikit-3.10.0/js/uikit-icons.min.js"></script>
 </head>
 
 <body>
-  <!-- Spencer's Backend Page -->
-<div>
-  <!-- Header -->
-  <div class="uk-container">
-    <h2 class="uk-text-center">Vibe Check-In!</h2>
-  </div>
-
-  <!-- all other page content -->
-  <div id="content-wrap" class="uk-container">
-    <img class="uk-align-center" id="chick-start" src="chicken-logo.png"></img>
-
-
-    <h2 id="iswork" class="uk-text-center">No Timer Set</h2>
-    <h2 id="time" class="uk-text-center"  >99:99</h2>
-  </div>
-
-  <!-- Footer -->
-  <footer id="footer">
+  <!-- Landing Page -->
+  <div>
+    <!-- Header -->
     <div class="uk-container">
-      <div class="uk-button-group">
-        <button id="time_start" class="uk-button uk-button-default uk-button-small">start</button>
-        <button id="time_end"   class="uk-button uk-button-default uk-button-small">end</button>
-        <button id="time_pause" class="uk-button uk-button-default uk-button-small">pause</button>
-        <button id="time_resume"class="uk-button uk-button-default uk-button-small">resume</button>
+      <h2 class="uk-text-center">Vibe Check-In!</h2>
+    </div>
+
+    <!-- all other page content -->
+    <div id="content-wrap-landing" class="uk-container">
+      <br><br>
+      <div id="welcome-text" class="uk-text-center uk-text-default uk-text-secondary">
+        Hello my frand! I'm Gappy. I'm here to make sure your
+        studying is healthy and productive. Let's get started!
       </div>
+      <div class="uk-margin">
+        <img class="uk-align-center" id="chick-start" src="./img/chicken-logo.png"></img>
+      </div>
+      <button id="checkPage" class="uk-button uk-align-center uk-margin-none" style="background-color: antiquewhite;">start</button>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="uk-container">
+      </div>
+    </footer>
   </div>
-  </footer>
-</div>
 </body>
+
 </html>
