@@ -1,3 +1,5 @@
+## Check-In Chicken!
+
 ## Inspiration
 Given the circumstances of the world right now, mental health is steadily being ignored. This is especially bad with students. So we developed a relatively unobtrusive way of checking in with yourself, your mental health, and the world, all while being productive!
 
