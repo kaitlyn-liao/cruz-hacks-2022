@@ -3,7 +3,6 @@ var bgpage = chrome.extension.getBackgroundPage();
 // ====================================================================== EVENTS 
 
 document.addEventListener("DOMContentLoaded", function() {
-  // alert("init");
   ev = document.getElementById("time_start");  ev.addEventListener("click", initTimer, false);
   ev = document.getElementById("time_end");    ev.addEventListener("click", handle_kill, false);
   ev = document.getElementById("time_resume"); ev.addEventListener("click", resumeTimer, false);
@@ -24,17 +23,27 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // ====================================================================== DISPLAY 
+function refreshTimer(){
+  seconds_left = bgpage.user_timer_seconds
+
+  var min = Math.floor(seconds_left/60);
+  var sec = seconds_left - (min*60);
+  if (sec < 10) { sec = "0" + sec; }
+  var msg = min.toString()+":"+sec;
+
+  var timeDisplay = document.getElementById("time");
+  timeDisplay.innerHTML = msg;
+
+}
 
 function refreshDisplay(){
 
   if(!bgpage.is_vibing){
     refreshTimer();
 
-    if( (document.getElementById("time").innerHTML == "0:00") && (bgpage.is_vibing == true) ){
+    if( (bgpage.is_vibing == true) ){
       check_in();
     }
-    // var timeDisplay = document.getElementById("time");
-    // timeDisplay.innerHTML = msg;
 
     if(bgpage.is_study == true)       { document.getElementById("is_work").innerHTML = "Study Time"; }
     else if(bgpage.is_study == false) { document.getElementById("is_work").innerHTML = "Break Time"; }
@@ -51,9 +60,6 @@ function hide(id){
 
 function show(id){
   document.getElementById(id).style.display = "inline";
-  // if(id == "help"){
-  //   vibe_answer(bgpage.vibe);
-  // }
 }
 
 function landtoform(){
@@ -61,7 +67,6 @@ function landtoform(){
 }
 
 function changePage(showID){
-  // alert("in change page " + showID);
   hide("land");
   hide("form");
   hide("time_page");
@@ -94,6 +99,7 @@ function initTimer(){
 
 function startTimer(){
   bgpage.set_alarm(true);
+  bgpage.set_is_timing(false)
   refreshDisplay();
 }
 
@@ -109,8 +115,6 @@ function killTimer(){
 
 function pauseTimer(){
     clearTimeout(refreshDisplayTimeout);
-    // hide("time_pause");
-    // show("time_resume");
     bgpage.pause();
 }
 
@@ -119,19 +123,6 @@ function resumeTimer(){
     // show("time_pause");
     bgpage.resume();
     refreshDisplay();
-}
-
-function refreshTimer(){
-  seconds_left = bgpage.user_timer_seconds
-
-  var min = Math.floor(seconds_left/60);
-  var sec = seconds_left - (min*60);
-  if (sec < 10) { sec = "0" + sec; }
-  var msg = min.toString()+":"+sec;
-
-  var timeDisplay = document.getElementById("time");
-  timeDisplay.innerHTML = msg;
-
 }
 
 // =================================== VIBE CHECK
@@ -149,11 +140,26 @@ function vibe_answer_hap(){ changePage("help"); vibe_answer("hap"); }
 function vibe_answer(v){
   bgpage.set_vibe(v);
 
-  if(bgpage.vibe == "sad"){ alert("sad"); }
-  if(bgpage.vibe == "meh"){ meh_help(); }
-  if(bgpage.vibe == "hap"){ hap_page(); }
+  if(bgpage.vibe == "sad"){ 
+    document.getElementById("help-meh-content").style.display = "none";
+    document.getElementById("help-hap-content").style.display = "none";
+    document.getElementById("help-sad-content").style.display = "inline";
+    sad_help(); 
+  }
 
-  // display next page and associated buttons to move on
+  if(bgpage.vibe == "meh"){ 
+    document.getElementById("help-sad-content").style.display = "none";
+    document.getElementById("help-hap-content").style.display = "none";
+    document.getElementById("help-meh-content").style.display = "inline";
+    meh_help(); 
+  }
+
+  if(bgpage.vibe == "hap"){ 
+    document.getElementById("help-sad-content").style.display = "none";
+    document.getElementById("help-meh-content").style.display = "none";
+    document.getElementById("help-hap-content").style.display = "inline";
+    hap_page(); 
+  }
 }
 
 function hap_page(){
@@ -192,15 +198,39 @@ function meh_help() {
   mehHTML += mehTextStyle; 
   mehHTML += iframeHTML;
 
-  help_div_id = document.getElementById('help-meh-content');
-  help_div_id.innerHTML = mehHTML;
+  help_div_id = document.getElementById('help-meh-content').innerHTML = mehHTML;
+}
+
+function sad_help(){
+  var sadHTML = "";
+
+  // document.getElementById("innerline").innerHTML = 
+  sadText = 
+    "When you have a negative study session, its important to remember that your mental " +
+    "health comes first and foremost, even above school work."+ 
+    "<br><br> Remember to stay hydrated and " +
+    "well-fed, and to go outside often to feel the sun on your feathers! " + 
+    "Since your having a bit of a rough time today, let me share my favorite " +
+    "resources to help me stay focused and mentally healthy! " +
+    "<br><br>" +
+    "<a href='https://www.crisistextline.org/'>If you need someone to talk to</a>" +
+    "<br><br>" +
+    "<a href='https://www.google.com/drive/'>If you need help organizing</a>" +
+    "<br><br>" +
+    "<a href='https://www.santacruz.org/things-to-do/parks/'>If you want to get in some me-time outdoors</a>";
+
+  sadTextStyle = "<div class='uk-text-center uk-text-default uk-text-secondary'> " + sadText + "</div>";
+
+  sadHTML += sadTextStyle;
+  document.getElementById("help-sad-content").innerHTML = sadHTML;
 }
 
 // need to make buttons and listeners for this
 function return_time(){
-  changePage("time_page");
-  bgpage.set_is_vibing(false);
+  bgpage.set_is_vibing(false); 
   bgpage.set_is_study(false);
+  bgpage.set_is_timing(true);
+  changePage("time_page");
   bgpage.set_alarm(bgpage.is_study);
 }
 

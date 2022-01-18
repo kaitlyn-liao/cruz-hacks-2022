@@ -1,10 +1,32 @@
 // background scripting
 
-// chrome.runtime.onInstalled.addListener(function() { alert("Check-In Chicken is installed!"); });
-
 var showpageID = "";
 function set_showpageID(p){
     showpageID = p;
+}
+
+function create_notif(){
+    if(is_study){
+        alert("Your study session is over!")
+        chrome.notifications.create('NOTFICATION_ID', {
+            type: 'basic',
+            iconUrl: "./img/chicken-logo.png",
+            title: 'Check-In Chicken: ',
+            message: 'Your study session is over! Come back for a mental check-in!',
+            priority: 2
+        });
+    }
+    else{
+        alert("I hope your break was healthy and relaxing!")
+        chrome.notifications.create('NOTFICATION_ID', {
+            type: 'basic',
+            iconUrl: "./img/chicken-logo.png",
+            title: 'Check-In Chicken: ',
+            message: "I hope your break was healthy and relaxing! Let's start your next study session!",
+            priority: 2
+        });
+    }
+    // alert("did notif")
 }
 
 // ====================================================================== TIMERS
@@ -12,8 +34,8 @@ function set_showpageID(p){
 var lag = 5;
 var alarmRingTimeout;
 var user_timer_seconds = null;
-var work_duration;
-var break_duration;
+var work_duration = null;
+var break_duration = null;
 var is_timing = false;
 var is_paused = false;
 var is_study = false;
@@ -38,17 +60,16 @@ function set_break_duration(time){
 function set_alarm(w){
     clearInterval(alarmRingTimeout);
     set_is_study(w);
-    set_is_timing(true);
     var tMillis;
-    if(is_study)  { tMillis = work_duration; }
+    if(is_study)    { tMillis = work_duration; }
     else            { tMillis = break_duration; }
     ringIn(tMillis + lag);
 }
 
 function kill_alarm(){
-    user_timer_seconds = 0;
-    work_duration = 0;
-    break_duration = 0;
+    user_timer_seconds = -1;
+    work_duration = -1;
+    break_duration = -1;
     is_paused = false;
     is_study = false;
     is_timing = false;
@@ -70,7 +91,7 @@ function ringIn(tMillis){
 
     alarmRingTimeout = setInterval( 
         function(){
-            if(!is_paused || is_vibing){
+            if(!is_paused && !is_vibing){
                 console.log(is_paused);
                 console.log(user_timer_seconds);
                 if(user_timer_seconds > 0){ user_timer_seconds--; }
@@ -81,7 +102,7 @@ function ringIn(tMillis){
 
 function ring(){
     if(showpageID == "time_page"){
-        alert("Study time is over! Good Work!");
+        create_notif();
         turnOff();
     }
 }
@@ -91,7 +112,9 @@ function turnOff(){
     user_timer_seconds = 0;
 
     set_is_timing(false)
-    if(is_study == true){ set_is_vibing(true); }
+    if(is_study){ 
+        set_is_vibing(true);
+    }
     else{
         set_is_vibing(false);
         set_is_study(!is_study);
