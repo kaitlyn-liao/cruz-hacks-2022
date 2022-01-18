@@ -99,7 +99,7 @@ function initTimer(){
 
 function startTimer(){
   bgpage.set_alarm(true);
-  bgpage.set_is_timing(false)
+  bgpage.set_is_timing(true)
   refreshDisplay();
 }
 

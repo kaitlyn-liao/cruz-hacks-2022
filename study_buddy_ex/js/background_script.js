@@ -13,7 +13,7 @@ function create_notif(){
             iconUrl: "./img/chicken-logo.png",
             title: 'Check-In Chicken: ',
             message: 'Your study session is over! Come back for a mental check-in!',
-            priority: 2
+            priority: 3
         });
     }
     else{
@@ -23,7 +23,7 @@ function create_notif(){
             iconUrl: "./img/chicken-logo.png",
             title: 'Check-In Chicken: ',
             message: "I hope your break was healthy and relaxing! Let's start your next study session!",
-            priority: 2
+            priority: 3
         });
     }
     // alert("did notif")
