@@ -3,7 +3,7 @@
   
     "name": "Check-In Chicken",
     "description": "This extension will help users study, as well as help keep their mental health positive",
-    "version": "1.0",
+    "version": "2.0",
 
   
     "browser_action": {
@@ -16,7 +16,6 @@
     },
 
     "permissions": [
-     "activeTab",
      "notifications"
     ]
   }
